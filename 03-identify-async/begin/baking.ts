@@ -20,21 +20,26 @@ const ingredients = [
 ];
 
 export function bakeCookies() {
-  const bowl = combine(ingredients);
+  const bowl = combine(ingredients); // synchronous
 
-  const batter = mix(bowl);
+  const batter = mix(bowl); // synchronous
 
   const cookieSheet = { batter, temp: 375, minutes: 10 };
 
-  bake(cookieSheet, cookies => {
+  bake(cookieSheet, cookies => { // asynchronous
     /**
      * we must wait 10 minutes for the oven
      * to bake the cookies
      * before we eat
      **/
-    eat(cookies);
+    eat(cookies); // synchronous
   });
+  
+  // Example of Function Types in TS
+  /* let logger : (message: string) => void;
 
+  let logError = (x:string): void => console.log(x);
+  logger = logError; */
   /**
    * private functions are below
    *

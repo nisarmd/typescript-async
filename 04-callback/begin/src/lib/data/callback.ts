@@ -14,6 +14,19 @@ import { apiUrl, parseList } from './config';
  * and all of his/her related data.
  * Use callbacks for both success and error conditions.
  */
+export function getHero(email: string,
+ callbackSuccess: (hero: Hero) => void,
+ callbackErr?: (msg: string) => void) {
+  getHeroCallback(email, (hero: Hero) => {
+    getOrdersCallback(hero.id, (orders: Order[]) => {
+      hero.orders = orders;
+    }, err => callbackErr(err));
+    getAccountRepCallback(hero.id, (accountRep: AccountRepresentative) => {
+      hero.accountRep = accountRep;
+      callbackSuccess(hero);
+    }, err => callbackErr(err)); 
+  }, (err: string): void => callbackErr(err));
+}
 
 const getHeroCallback = function(
   email: string,

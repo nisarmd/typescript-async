@@ -95,16 +95,21 @@ const getAccountRepCallback = function(
 /**
  * Promisified call
  **/
+// Turning calback into promise.
 function promisifiedCallback() {
+  // Define a function
   const getHeroTreePromisified = (email: string) => {
+    //create a promise
     return new Promise((resolve, reject) => {
+      // call the callback function withinn
       getHeroTreeCallback(
         email,
-        (hero: Hero) => resolve(hero),
-        (msg?: string) => reject(msg),
+        (hero: Hero) => resolve(hero), // Function type to resolve a positive response callback
+        (msg?: string) => reject(msg), // Function type to reject a negative error callback
       );
     });
   };
+  // Method invoke / entry point.
   getHeroTreePromisified('madelyn@acme.com').then(() => {
     console.log('next');
   });

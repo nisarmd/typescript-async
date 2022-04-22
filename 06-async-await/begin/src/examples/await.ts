@@ -12,6 +12,8 @@ const delay = (ms: number) =>
  */
 export async function getHeroesViaAsyncAwait() {
   // TODO - get heroes after a delay
+  await delay(1000);
+  return heroes;
 }
 
 /**
@@ -19,8 +21,14 @@ export async function getHeroesViaAsyncAwait() {
  * except this always causes an error
  * because it always is []
  */
-export async function getHeroesAndThrow() {
+export async function getHeroesAndThrow(): Promise<Hero[]> {
   // TODO - get empty array heroes after a delay
+  await delay(1000);
+  const heros: Hero[] = [] as Hero[];
+  if(!heros || !heros.length) {
+    throw Error('Error: No heros found')
+  }
+  return heros;
 }
 
 /**

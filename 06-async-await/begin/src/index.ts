@@ -52,6 +52,14 @@ async function renderHeroesAsync() {
   showFetching();
   showMessage();
   // TODO - getHeroesViaAsyncAwait
+  try {
+    const heros = await getHeroesViaAsyncAwait();
+    showHeroes(heros);
+  } catch (error) {
+    handleErrors(error);
+  } finally {
+    wrapUp();
+  }
 }
 
 /**
@@ -63,6 +71,14 @@ async function renderHeroesButThrow() {
   showFetching();
   showMessage();
   // TODO - getHeroesAndThrow
+  try {
+    const heros = await getHeroesAndThrow();
+    showHeroes(heros);
+  } catch (error) {
+    handleErrors(error);  //Important to handle error otherwise UI resources will not be freed by finally.
+  } finally {
+    wrapUp(); // Important to wrapup finally
+  }
 }
 
 async function render() {
